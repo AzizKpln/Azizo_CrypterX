@@ -5,6 +5,7 @@ import os.path
 from os import listdir
 from os.path import isfile, join
 import time
+
 import getpass
 
 class Encryptor:
@@ -28,7 +29,7 @@ class Encryptor:
             with open(file_name + ".enc", 'wb') as fo:
                 fo.write(enc)
                 os.remove(file_name)
-        except:
+        except FileNotFoundError:
              
             os.system("cls||clear")
             print("Hocam girdiğin dosyayı kontrol et yanlış girmişsin.\n\n")
@@ -52,10 +53,10 @@ class Encryptor:
             with open(file_name[:-4], 'wb') as fo:
                 fo.write(dec)
             os.remove(file_name)
-        except:
+        except FileNotFoundError:
             os.system("cls||clear")
             print("->Eğer parola girerken bu yazı karşına çıkıyorsa ve aynı parolayı girdiğine eminsen programı kapat ve yeniden başlat.\n\n->Yukarıdaki seçenek değilse girdiğin dosya ismi yanlış demektir kontrol et ve tekrar dene.")
-            time.sleep(2)
+            time.sleep(4)
             
                 
                 
@@ -71,22 +72,27 @@ class Encryptor:
     def encrypt_all_files(self):
         ask=input("Valla reis şimdi sen bunu seçersen ne var ne yok şifreliyecek.\n\nDevam etmek istediğine emin misin?(e/h)")
         ask=ask.upper()
-        if(ask=="E" or ask=="EVET"):
-            dirs = self.getAllFiles()
-            for file_name in dirs:
-                self.encrypt_file(file_name)
-        elif(ask=="H" or ask=="HAYIR"):
-            print("->Tamam knk.\n\n")
-            time.sleep(2)
+        if(ask=="H" or ask=="HAYIR"):
+            print("->Tamam knk.Çıkıyom..")
+            time.sleep(5)
+            exit()
+        dirs = self.getAllFiles()
+        for file_name in dirs:
+            self.encrypt_file(file_name)
+        os.system("cls||clear")
+        print("->Dosyalar Encryptlendi...\n->Çıkış Yapılıyor..")
+        time.sleep(2)
+        
             
 
     def decrypt_all_files(self):
         dirs = self.getAllFiles()
-        if(".py" in dirs):
-            pass
-        else:
-            for file_name in dirs:
-                self.decrypt_file(file_name)
+        for file_name in dirs:
+            self.decrypt_file(file_name)
+        os.system("cls||clear")
+        print("->Dosyalar Encryptlendi...\n->Çıkış Yapılıyor..")
+        time.sleep(2)
+            
 
 
 key = b'[EX\xc8\xd5\xbfI{\xa2$\x05(\xd5\x18\xbf\xc0\x85)\x10nc\x94\x02)j\xdf\xcb\xc4\x94\x9d(\x9e'
